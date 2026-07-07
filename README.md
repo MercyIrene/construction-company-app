@@ -49,10 +49,21 @@ docs/                     Founding documents (this body of work)
 docs/adr/                 Architecture Decision Records
 supabase/migrations/      PostgreSQL schema — the domain model, executable
 supabase/README.md        How to run the schema locally
+apps/web/                 Next.js app: landing, owner portal, ops console
+packages/domain/          Pure-TS domain: state machines, ledger, score (tested)
 ```
 
-Application code lands in `apps/` and `packages/` per the structure specified in `docs/12-implementation-plan.md` §3.
+## Run it
+
+```bash
+pnpm install
+cp .env.example apps/web/.env.local   # add SUPABASE_SECRET_KEY for write paths
+pnpm dev                              # http://localhost:3000
+pnpm test && pnpm typecheck && pnpm build
+```
+
+The production Supabase project is `msingi` (eu-central-1); migrations 00001–00003 are applied there and a demo project (`MSG-2026-0001`) is seeded. The first user to sign in is bootstrapped as `staff_admin` and lands in the delivery console.
 
 ## Status
 
-**Stage:** pre-seed, pre-build. This body of work is the input to (a) the validation sprint in `docs/03-validation-plan.md` and (b) the Phase-1 engineering build in `docs/12-implementation-plan.md`. Dated 2026-07-07.
+**Stage:** validation build (epic E1 "thin spine" in progress per `docs/12-implementation-plan.md`). Live: schema with DB-enforced money invariants, auth, delivery console (projects, milestone loop), owner portal with release approval, double-entry ledger posting on the manual rail. Next: evidence upload UI, snags, weekly reports (E2). Dated 2026-07-07.

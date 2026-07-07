@@ -21,3 +21,6 @@ R1 demands relational integrity and transactions (ledger, milestone gates); R6 d
 
 ## Revisit when
 Sustained DB > USD 2K/mo, need for read replicas beyond offering, or a regulatory mandate for in-country primary storage.
+
+## Amendment 2026-07-07 — region
+Supabase does not offer af-south-1 on the current tier. Production project runs in **eu-central-1 (Frankfurt)**: strong Nairobi latency over the Europe–East Africa cable routes, and EU data-protection adequacy simplifies the Kenya DPA cross-border-safeguards narrative (doc 06 §6). Revisit if Supabase reopens an African region or scale justifies self-managed Postgres in af-south-1.

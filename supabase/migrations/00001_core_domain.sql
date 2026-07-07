@@ -5,7 +5,7 @@
 -- =============================================================================
 
 create extension if not exists "pgcrypto";
-create extension if not exists "postgis";
+create extension if not exists "postgis" with schema "extensions";
 
 -- =====================================================================
 -- 0 · Shared enums
@@ -207,8 +207,8 @@ create table sites (
   county        text not null,
   sub_county    text,
   parcel_no     text,                        -- LR / title reference
-  location      geography(point, 4326),
-  geofence      geography(polygon, 4326),    -- evidence admissibility boundary
+  location      extensions.geography(point, 4326),
+  geofence      extensions.geography(polygon, 4326),    -- evidence admissibility boundary
   geofence_tolerance_m integer not null default 150,
   country_code  text not null default 'KE',
   created_at    timestamptz not null default now()
@@ -472,7 +472,7 @@ create table evidence_items (
   status         evidence_status not null default 'pending_validation',
   captured_by    uuid references user_profiles(user_id),
   captured_at    timestamptz,
-  gps            geography(point, 4326),
+  gps            extensions.geography(point, 4326),
   within_geofence boolean,
   exif           jsonb,
   created_at     timestamptz not null default now()
