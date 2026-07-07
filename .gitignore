@@ -5,3 +5,5 @@ node_modules/
 .supabase/
 *.log
 .DS_Store
+*.tsbuildinfo
+.vercel/
